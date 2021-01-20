@@ -304,6 +304,19 @@ final class SupportedEntities {
       ],
     ];
 
+$civicrm_entity_info['civicrm_group_contact'] = [
+  'civicrm entity label' => t('Group Contact'),
+  'civicrm entity name' => 'group_contact',
+  'label property' => 'id',
+    'permissions' => [
+    'view' => ['edit groups'],
+    'edit' => ['edit groups'],
+    'update' => ['edit groups'],
+    'create' => ['edit groups'],
+    'delete' => ['edit groups', 'administer CiviCRM'],
+  ],
+];
+
     $civicrm_entity_info['civicrm_grant'] = [
       'civicrm entity label' => t('Grant'),
       'civicrm entity name' => 'grant',
@@ -613,7 +626,7 @@ final class SupportedEntities {
       ],
     ];
     $civicrm_entity_info['civicrm_custom_group'] = [
-      'civicrm entity label' => t('Group'),
+      'civicrm entity label' => t('Custom field group'),
       'civicrm entity name' => 'custom_group',
       'label property' => 'title',
       'permissions' => [
@@ -634,6 +647,31 @@ final class SupportedEntities {
         'update' => ['edit all contacts'],
         'create' => ['edit all contacts'],
         'delete' => ['delete contacts'],
+      ],
+    ];
+
+    $civicrm_entity_info['civicrm_mailing'] = [
+      'civicrm entity label' => t('Mailing'),
+      'civicrm entity name' => 'mailing',
+      'label property' => 'name',
+      'permissions' => [
+        'view' => ['view all mailing'],
+        'edit' => ['edit all mailing'],
+        'update' => ['edit all mailing'],
+        'create' => ['edit all mailing'],
+        'delete' => ['delete mailing'],
+      ]
+    ];
+
+    $civicrm_entity_info['civicrm_mailing_job'] = [
+      'civicrm entity label' => t('Mailing job'),
+      'civicrm entity name' => 'mailing_job',
+      'label property' => 'id',
+      'permissions' => [
+        'view' => [],
+        'update' => [],
+        'create' => [],
+        'delete' => [],
       ],
     ];
     $civicrm_entity_info['civicrm_option_value'] = [
