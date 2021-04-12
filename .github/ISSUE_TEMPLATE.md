@@ -8,4 +8,4 @@ _Steps in order to reproduce the bug._
 
 Proposed resolution
 ----------------------------------------
-_Suggestions to fix the bug or a resolution for the problem.
+_Suggestions to fix the bug or a resolution for the problem._
