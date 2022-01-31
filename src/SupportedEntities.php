@@ -714,6 +714,7 @@ $civicrm_entity_info['civicrm_group_contact'] = [
     });
     foreach ($civicrm_entity_info as $entity_type => $entity_info) {
       if (!in_array($entity_info['civicrm entity name'], $api_entity_types)) {
+        var_dump($entity_type);
         unset($civicrm_entity_info[$entity_type]);
       }
     }
