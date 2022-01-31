@@ -81,7 +81,7 @@ jobs:
       - name: Install civicrm_entity
         run: |
           cd ~/drupal
-          COMPOSER_MEMORY_LIMIT=-1 composer require drupal/civicrm_entity *@dev
+          COMPOSER_MEMORY_LIMIT=-1 composer require drupal/civicrm_entity:@dev
       - name: Install integration test modules
         run: |
           cd ~/drupal
