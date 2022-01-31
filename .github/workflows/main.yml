@@ -96,6 +96,7 @@ jobs:
           mkdir $BROWSERTEST_OUTPUT_DIRECTORY
           cd ~/drupal/web
           ../vendor/bin/phpunit -c core --debug --filter=testEnableNewEntityTypes modules/contrib/civicrm_entity/tests/src/FunctionalJavascript/CivicrmEntitySettingsFormTest.php
+          ../vendor/bin/phpunit -c core --debug modules/contrib/civicrm_entity/tests/src/Kernel
         env:
           SYMFONY_DEPRECATIONS_HELPER: disabled
           SIMPLETEST_DB: mysql://root:@127.0.0.1:${{ job.services.mysql.ports[3306] }}/db
