@@ -81,7 +81,7 @@ jobs:
       - name: Install civicrm_entity
         run: |
           cd ~/drupal
-          COMPOSER_MEMORY_LIMIT=-1 composer require drupal/civicrm_entity:@dev
+          COMPOSER_MEMORY_LIMIT=-1 composer require drupal/civicrm_entity *@dev
       - name: Install integration test modules
         run: |
           cd ~/drupal
@@ -95,8 +95,7 @@ jobs:
         run: |
           mkdir $BROWSERTEST_OUTPUT_DIRECTORY
           cd ~/drupal/web
-          cat modules/contrib/civicrm_entity/src/SupportedEntities.php
-          ../vendor/bin/phpunit -c core --debug --filter=testEnableNewEntityTypes modules/contrib/civicrm_entity/tests/src/FunctionalJavascript/CivicrmEntitySettingsFormTest.php
+          ../vendor/bin/phpunit -c core modules/contrib/civicrm_entity
         env:
           SYMFONY_DEPRECATIONS_HELPER: disabled
           SIMPLETEST_DB: mysql://root:@127.0.0.1:${{ job.services.mysql.ports[3306] }}/db
