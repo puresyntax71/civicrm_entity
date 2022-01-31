@@ -94,6 +94,7 @@ jobs:
       - name: Run PHPUnit
         run: |
           mkdir $BROWSERTEST_OUTPUT_DIRECTORY
+          cat modules/contrib/civicrm_entity/src/SupportedEntities.php
           cd ~/drupal/web
           ../vendor/bin/phpunit -c core --debug --filter=testEnableNewEntityTypes modules/contrib/civicrm_entity/tests/src/FunctionalJavascript/CivicrmEntitySettingsFormTest.php
         env:
