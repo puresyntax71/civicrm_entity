@@ -13,24 +13,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a 'Load Linked User' action.
- *
- * @RulesAction(
- *   id = "civicrm_entity_load_linked_user",
- *   label = @Translation("Load Linked User"),
- *   category = @Translation("CiviCRM"),
- *   context_definitions = {
- *     "contact_id" = @ContextDefinition("integer",
- *       label = @Translation("Contact ID"),
- *       description = @Translation("The numeric contact id."),
- *       required = TRUE
- *     ),
- *   },
- *   provides = {
- *     "user_fetched" = @ContextDefinition("entity:user",
- *       label = @Translation("Fetched user")
- *     ),
- *   }
- * )
  */
 #[RulesAction(
   id: "civicrm_entity_load_linked_user",

@@ -15,8 +15,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * An "In" handler to include CiviCRM API.
  *
  * @ingroup views_filter_handlers
- *
- * @ViewsFilter("civicrm_entity_in_operator")
  */
 #[ViewsFilter("civicrm_entity_in_operator")]
 class InOperator extends BaseInOperator {

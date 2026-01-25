@@ -15,11 +15,6 @@ use Drupal\civicrm_entity\CiviCrmApiInterface;
  * Default argument plugin to get the current user's civicrm contact ID.
  *
  * This plugin actually has no options so it does not need to do a great deal.
- *
- * @ViewsArgumentDefault(
- *   id = "current_user_contact_id",
- *   title = @Translation("Contact ID from logged in user")
- * )
  */
 #[ViewsArgumentDefault(
   id: 'current_user_contact_id',

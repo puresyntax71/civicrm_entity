@@ -19,8 +19,6 @@ use Drupal\views\Views;
  *   the base table.
  *
  * @ingroup views_relationship_handlers
- *
- * @ViewsRelationship("civicrm_entity_civicrm_bridge")
  */
 #[ViewsRelationship("civicrm_entity_civicrm_bridge")]
 class CiviCrmBridgeRelationshipBase extends RelationshipPluginBase {

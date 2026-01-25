@@ -15,8 +15,6 @@ use Drupal\Component\Utility\UrlHelper;
  * Display file link base on CiviCRM.
  *
  * @ingroup views_field_handlers
- *
- * @ViewsField("civicrm_entity_custom_file")
  */
 #[ViewsField("civicrm_entity_custom_file")]
 class CustomFile extends FieldPluginBase {

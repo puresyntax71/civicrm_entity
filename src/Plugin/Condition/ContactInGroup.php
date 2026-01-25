@@ -14,26 +14,6 @@ use Drupal\rules\Core\Attribute\Condition;
 
 /**
  * Provides a 'CiviCRM Contact in Group' condition.
- *
- * @Condition(
- *   id = "civicrm_entity_contact_in_group",
- *   label = @Translation("CiviCRM Contact in Group"),
- *   category = @Translation("CiviCRM"),
- *   context_definitions = {
- *     "civicrm_contact" = @ContextDefinition("entity:civicrm_contact",
- *        label = @Translation("CiviCRM contact entity"),
- *        description = @Translation("The CiviCRM contact entity."),
- *        required = TRUE
- *      ),
- *     "group" = @ContextDefinition("string",
- *       label = @Translation("Group"),
- *       description = @Translation("The group the contact is in."),
- *       options_provider = "\Drupal\civicrm_entity\TypedData\Options\CivicrmGroupOptions",
- *       multiple = FALSE,
- *       required = TRUE
- *     ),
- *   }
- * )
  */
 #[Condition(
   id: "civicrm_entity_contact_in_group",

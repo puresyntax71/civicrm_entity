@@ -9,8 +9,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class for MailingJobOpened.
- *
- * @ViewsField("civicrm_entity_mailing_event")
  */
 #[ViewsField("civicrm_entity_mailing_event")]
 class MailingEvent extends NumericField {

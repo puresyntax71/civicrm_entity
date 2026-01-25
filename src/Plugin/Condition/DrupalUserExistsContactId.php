@@ -13,19 +13,6 @@ use Drupal\user\Entity\User;
 
 /**
  * Provides a 'Drupal linked User exists' condition.
- *
- * @Condition(
- *   id = "civicrm_contact_id_drupal_user_exists",
- *   label = @Translation("CiviCRM Contact Id linked User exists"),
- *   category = @Translation("CiviCRM"),
- *   context_definitions = {
- *     "civicrm_contact_id" = @ContextDefinition("integer",
- *        label = @Translation("CiviCRM contact ID"),
- *        description = @Translation("The CiviCRM contact ID."),
- *        required = TRUE
- *      )
- *   }
- * )
  */
 #[Condition(
   id: "civicrm_contact_id_drupal_user_exists",

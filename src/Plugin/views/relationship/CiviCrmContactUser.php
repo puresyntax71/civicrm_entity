@@ -11,8 +11,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Relationship for referencing civicrm_contact and user.
  *
  * @ingroup views_relationship_handlers
- *
- * @ViewsRelationship("civicrm_entity_civicrm_contact_user")
  */
 #[ViewsRelationship("civicrm_entity_civicrm_contact_user")]
 class CiviCrmContactUser extends CiviCrmBridgeRelationshipBase {

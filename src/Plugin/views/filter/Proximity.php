@@ -13,8 +13,6 @@ use Drupal\Core\Database\Query\Condition;
 
 /**
  * Filter handler for proximity.
- *
- * @ViewsFilter("civicrm_entity_civicrm_address_proximity")
  */
 #[ViewsFilter("civicrm_entity_civicrm_address_proximity")]
 class Proximity extends FilterPluginBase {
@@ -277,8 +275,8 @@ class Proximity extends FilterPluginBase {
    * NEW: Get the processed proximity values for use by distance field.
    */
   public function getProximityValues() {
-    if (empty($this->value) || 
-        (empty($this->value['value']) && empty($this->value['city']) && empty($this->value['state_province_id'])) || 
+    if (empty($this->value) ||
+        (empty($this->value['value']) && empty($this->value['city']) && empty($this->value['state_province_id'])) ||
         empty($this->value['distance'])) {
       return [];
     }
@@ -301,7 +299,7 @@ class Proximity extends FilterPluginBase {
       ];
 
       $geocoded_address = $this->getGeocodedAddress($proximity_address);
-      
+
       return [
         'latitude' => $geocoded_address['latitude'],
         'longitude' => $geocoded_address['longitude'],

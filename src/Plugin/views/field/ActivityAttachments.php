@@ -14,8 +14,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Display file link base on CiviCRM.
  *
  * @ingroup views_field_handlers
- *
- * @ViewsField("civicrm_entity_activity_attachments")
  */
 #[ViewsField("civicrm_entity_activity_attachments")]
 class ActivityAttachments extends FieldPluginBase {

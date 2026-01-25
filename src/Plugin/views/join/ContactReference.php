@@ -12,7 +12,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Join handler for relationships for "Contact Reference" data type.
  *
  * @ingroup views_join_handlers
- * @ViewsJoin("civicrm_entity_contact_reference")
  */
 #[ViewsJoin("civicrm_entity_contact_reference")]
 class ContactReference extends JoinPluginBase implements ContainerFactoryPluginInterface {

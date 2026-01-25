@@ -11,8 +11,6 @@ use Drupal\Core\Routing\RouteMatchInterface;
  * Argument handler for CiviCRM dates.
  *
  * @ingroup views_argument_handlers
- *
- * @ViewsArgument("civicrm_entity_date")
  */
 #[ViewsArgument(
   id: 'civicrm_entity_date'

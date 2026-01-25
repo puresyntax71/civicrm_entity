@@ -12,8 +12,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * An "Date" handler to include CiviCRM API.
  *
  * @ingroup views_filter_handlers
- *
- * @ViewsFilter("civicrm_entity_date")
  */
 #[ViewsFilter("civicrm_entity_date")]
 class Date extends BaseDate {

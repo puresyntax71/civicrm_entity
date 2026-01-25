@@ -11,8 +11,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Filter handler for proximity.
- *
- * @ViewsFilter("civicrm_entity_civicrm_address_state_province")
  */
 #[ViewsFilter("civicrm_entity_civicrm_address_state_province")]
 class StateProvince extends ListField {

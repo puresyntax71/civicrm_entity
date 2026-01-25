@@ -15,13 +15,6 @@ use Drupal\civicrm_entity\CiviCrmApi;
 
 /**
  * Action to add CiviCRM Contact to a CiviCRM group.
- *
- * @Action(
- *   id = "civicrm_contact_add_to_group",
- *   label = @Translation("Add Contact to Group"),
- *   type = "civicrm_contact",
- *   confirm = TRUE,
- * )
  */
 #[Action(
   id: 'civicrm_contact_add_to_group',

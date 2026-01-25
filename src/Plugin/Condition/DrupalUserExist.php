@@ -14,19 +14,6 @@ use Drupal\civicrm_entity\Entity\CivicrmEntity;
 
 /**
  * Provides a 'Drupal linked User exists' condition.
- *
- * @Condition(
- *   id = "civicrm_entity_drupal_user_exists",
- *   label = @Translation("CiviCRM Contact linked User exists"),
- *   category = @Translation("CiviCRM"),
- *   context_definitions = {
- *     "civicrm_contact" = @ContextDefinition("entity:civicrm_contact",
- *        label = @Translation("CiviCRM contact entity"),
- *        description = @Translation("The CiviCRM contact entity."),
- *        required = TRUE
- *      )
- *   }
- * )
  */
 #[Condition(
   id: "civicrm_entity_drupal_user_exists",

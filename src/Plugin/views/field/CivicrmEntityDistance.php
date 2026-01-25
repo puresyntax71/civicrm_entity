@@ -14,8 +14,6 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Field handler to display calculated distance from proximity filter.
- *
- * @ViewsField("civicrm_entity_distance")
  */
 #[ViewsField("civicrm_entity_distance")]
 class CivicrmEntityDistance extends FieldPluginBase {
@@ -33,7 +31,7 @@ class CivicrmEntityDistance extends FieldPluginBase {
   public function query() {
     // Get coordinates from proximity filter
     $center_lat = $center_lon = NULL;
-    
+
     // Method 1: Check view storage (set by proximity filter)
     if (!empty($this->view->proximity_center)) {
       $center_lat = $this->view->proximity_center['latitude'];
@@ -53,10 +51,10 @@ class CivicrmEntityDistance extends FieldPluginBase {
     if ($center_lat && $center_lon) {
       // Get the correct table alias for civicrm_address
       $address_table = 'contact_id_civicrm_contact';
-      
+
       // Create distance formula with proper table alias
       $formula = $this->getDistanceFormula($center_lat, $center_lon, $address_table);
-      
+
       // Add the field to the query
       $this->field_alias = $this->query->addField(NULL, $formula, 'distance_calculated');
       $this->addAdditionalFields();
@@ -68,13 +66,13 @@ class CivicrmEntityDistance extends FieldPluginBase {
    */
   protected function getProximityFilter() {
     $filters = $this->view->display_handler->getHandlers('filter');
-    
+
     foreach ($filters as $filter_id => $filter) {
       if ($filter->getPluginId() == 'civicrm_entity_civicrm_address_proximity') {
         return $filter;
       }
     }
-    
+
     return NULL;
   }
 
@@ -86,17 +84,17 @@ class CivicrmEntityDistance extends FieldPluginBase {
     if (empty($address_table)) {
       $address_table = 'civicrm_address';
     }
-    
+
     // Determine the unit to use
     $unit = $this->getDistanceUnit();
-    
+
     // Set earth radius based on unit
     if ($unit == 'mi' || $unit == 'miles') {
       $earth_radius = 3958.8; // Earth radius in miles
     } else {
       $earth_radius = 6378.137; // Earth radius in kilometers
     }
-    
+
     // Distance formula with proper units
     $formula = "
       (ACOS(
@@ -107,7 +105,7 @@ class CivicrmEntityDistance extends FieldPluginBase {
         SIN(RADIANS($center_lat))
       ) * $earth_radius)
     ";
-    
+
     return $formula;
   }
 
@@ -119,7 +117,7 @@ class CivicrmEntityDistance extends FieldPluginBase {
     if (!empty($this->options['unit'])) {
       return $this->options['unit'];
     }
-    
+
     // Priority 2: Proximity filter settings
     if (!empty($this->view->proximity_center['distance_unit'])) {
       $proximity_unit = $this->view->proximity_center['distance_unit'];
@@ -130,7 +128,7 @@ class CivicrmEntityDistance extends FieldPluginBase {
         return 'km';
       }
     }
-    
+
     // Priority 3: Get from proximity filter directly
     $proximity_filter = $this->getProximityFilter();
     if ($proximity_filter && !empty($proximity_filter->value['distance_unit'])) {
@@ -141,7 +139,7 @@ class CivicrmEntityDistance extends FieldPluginBase {
         return 'km';
       }
     }
-    
+
     // Default to kilometers
     return 'km';
   }
@@ -151,17 +149,17 @@ class CivicrmEntityDistance extends FieldPluginBase {
    */
   public function render(ResultRow $values) {
     $value = $this->getValue($values);
-    
+
     if ($value !== NULL && $value !== '') {
       $distance = round((float)$value, (int)($this->options['precision'] ?? 2));
       $unit = $this->getDistanceUnit();
-      
+
       // Display unit labels
       $unit_label = ($unit == 'mi' || $unit == 'miles') ? 'mi' : 'km';
-      
+
       return $distance . ' ' . $unit_label;
     }
-    
+
     return '';
   }
 
@@ -180,7 +178,7 @@ class CivicrmEntityDistance extends FieldPluginBase {
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
-    
+
     $form['unit'] = [
       '#type' => 'select',
       '#title' => $this->t('Distance unit'),
@@ -192,7 +190,7 @@ class CivicrmEntityDistance extends FieldPluginBase {
       ],
       '#default_value' => $this->options['unit'],
     ];
-    
+
     $form['precision'] = [
       '#type' => 'number',
       '#title' => $this->t('Decimal places'),
