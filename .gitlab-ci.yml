@@ -1,0 +1,88 @@
+################
+# GitLabCI template for Drupal projects.
+#
+# This template is designed to give any Contrib maintainer everything they need to test, without requiring modification.
+# It is also designed to keep up to date with Core Development automatically through the use of include files that can be centrally maintained.
+# As long as you include the project, ref and three files below, any future updates added by the Drupal Association will be used in your
+# pipelines automatically. However, you can modify this template if you have additional needs for your project.
+# The full documentation is on https://project.pages.drupalcode.org/gitlab_templates/
+################
+
+include:
+  - project: $_GITLAB_TEMPLATES_REPO
+    ref: $_GITLAB_TEMPLATES_REF
+    file:
+      - '/includes/include.drupalci.main.yml'
+      - '/includes/include.drupalci.variables.yml'
+      - '/includes/include.drupalci.workflows.yml'
+
+variables:
+  OPT_IN_TEST_PREVIOUS_MAJOR: '1'
+  OPT_IN_TEST_MAX_PHP: '1'
+  SKIP_NIGHTWATCH: '1'
+  DRUPAL_PROJECTS_PATH: 'modules/contrib'
+
+# CiviCRM packages installed after Drupal base install, inside script so
+# they are included in the artifact (artifacts upload before after_script).
+# CIVICRM_VERSION is set per composer variant.
+.civicrm-require:
+  script:
+    - composer config minimum-stability dev
+    - composer config prefer-stable true
+    - composer config extra.enable-patching true
+    - composer config extra.compile-mode all
+    - composer config allow-plugins.civicrm/composer-compile-plugin true
+    - composer config allow-plugins.civicrm/composer-downloads-plugin true
+    - composer config allow-plugins.civicrm/civicrm-asset-plugin true
+    - composer config allow-plugins.cweagans/composer-patches true
+    - COMPOSER_MEMORY_LIMIT=-1 composer require "civicrm/civicrm-asset-plugin:~1.1" "civicrm/civicrm-core:${CIVICRM_VERSION}" "civicrm/civicrm-packages:${CIVICRM_VERSION}" "civicrm/civicrm-drupal-8:${CIVICRM_VERSION}" -W
+    - COMPOSER_MEMORY_LIMIT=-1 composer require drupal/fullcalendar_view
+
+# Creates the db_civicrm database before PHPUnit runs.
+# before_script shares the shell with script so the DB is ready when tests start.
+.civicrm-db-setup:
+  before_script:
+    - mysql -u root --password="${MYSQL_ROOT_PASSWORD}" -h database -e 'CREATE DATABASE IF NOT EXISTS db_civicrm;'
+
+# Composer variants — installs Drupal (via template base), then CiviCRM.
+# CIVICRM_VERSION varies per variant; DRUPAL_CORE and PHP_VERSION come from the template.
+composer:
+  variables:
+    CIVICRM_VERSION: '5.81.*'
+  script:
+    - !reference [.composer-base, script]
+    - !reference [.civicrm-require, script]
+
+composer (max PHP version):
+  variables:
+    CIVICRM_VERSION: '6.0.*'
+  script:
+    - !reference [.composer-base, script]
+    - !reference [.civicrm-require, script]
+
+composer (previous major):
+  variables:
+    CIVICRM_VERSION: '5.75.*'
+  script:
+    - !reference [.composer-base, script]
+    - !reference [.civicrm-require, script]
+
+# PHPUnit variants — creates db_civicrm before tests and exposes SIMPLETEST_CIVICRM_DB.
+# Credentials are the template's static test-only values from .test-variables.
+phpunit:
+  variables:
+    SIMPLETEST_CIVICRM_DB: "mysql://drupaltestbot:drupaltestbotpw@database/db_civicrm"
+  before_script:
+    - !reference [.civicrm-db-setup, before_script]
+
+phpunit (max PHP version):
+  variables:
+    SIMPLETEST_CIVICRM_DB: "mysql://drupaltestbot:drupaltestbotpw@database/db_civicrm"
+  before_script:
+    - !reference [.civicrm-db-setup, before_script]
+
+phpunit (previous major):
+  variables:
+    SIMPLETEST_CIVICRM_DB: "mysql://drupaltestbot:drupaltestbotpw@database/db_civicrm"
+  before_script:
+    - !reference [.civicrm-db-setup, before_script]
