@@ -50,22 +50,22 @@ composer:
   variables:
     CIVICRM_VERSION: '5.81.*'
   script:
-    - !reference [.composer-base, script]
     - !reference [.civicrm-require, script]
+    - !reference [.composer-base, script]
 
 composer (max PHP version):
   variables:
     CIVICRM_VERSION: '6.0.*'
   script:
-    - !reference [.composer-base, script]
     - !reference [.civicrm-require, script]
+    - !reference [.composer-base, script]
 
 composer (previous major):
   variables:
     CIVICRM_VERSION: '5.75.*'
   script:
-    - !reference [.composer-base, script]
     - !reference [.civicrm-require, script]
+    - !reference [.composer-base, script]
 
 # PHPUnit variants — creates db_civicrm before tests and exposes SIMPLETEST_CIVICRM_DB.
 # Credentials are the template's static test-only values from .test-variables.
